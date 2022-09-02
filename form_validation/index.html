@@ -23,6 +23,7 @@
                         type="text"
                         placeholder="VD: Sơn Đặng"
                         class="form-control"
+                        rules="required"
                     />
                     <span class="form-message"></span>
                 </div>
@@ -35,6 +36,7 @@
                         type="text"
                         placeholder="VD: email@domain.com"
                         class="form-control"
+                        rules="required|email"
                     />
                     <span class="form-message"></span>
                 </div>
@@ -47,11 +49,12 @@
                         type="password"
                         placeholder="Nhập mật khẩu"
                         class="form-control"
+                        rules="required|min:6"
                     />
                     <span class="form-message"></span>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
                     <input
                         id="password_confirmation"
@@ -99,38 +102,18 @@
                     </div>
 
                     <span class="form-message"></span>
-                </div>
+                </div> -->
 
                 <button class="form-submit">Đăng ký</button>
             </form>
         </div>
-        <script src="./validator.js"></script>
+        <script src="./validator_2.js"></script>
         <script>
             // Mong muốn output sẽ nhận được
-            Validator({
-                form: "#form-1",
-                formGroupSelector: ".form-group",
-                errorSelector: ".form-message",
-                rules: [
-                    Validator.isRequired("#fullname", "Vui lòng nhập tên đầy đủ của bạn"),
-                    Validator.isRequired("#email"),
-                    Validator.isEmail("#email"),
-                    Validator.minLength("#password", 6),
-                    Validator.isRequired("#password_confirmation"),
-                    Validator.isConfirmed(
-                        "#password_confirmation",
-                        function () {
-                            return document.querySelector("#form-1 #password").value;
-                        },
-                        "Mật khẩu nhập lại không chính xác"
-                    ),
-                    Validator.isRequired('input[name="gender"]', "Vui lòng chọn giới tính"),
-                ],
-                onSubmit: function (data) {
-                    // Call API
-                    console.log(data);
-                },
-            });
+            var form = new Validator("#form-1");
+            form.onSubmit = function (formData) {
+                console.log(formData);
+            };
         </script>
     </body>
 </html>
